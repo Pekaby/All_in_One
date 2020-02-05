@@ -1,5 +1,10 @@
 <?
 
+$host = '127.0.0.1';
+$username = 'root';
+$password_for_database = '';
+$name_database = 'all_in_one';
+
 $CONNECT = mysqli_connect('127.0.0.1','root','','all_in_one');
 
 //URL detect
