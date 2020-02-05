@@ -5,7 +5,7 @@ $username = 'root';
 $password_for_database = '';
 $name_database = 'all_in_one';
 
-$CONNECT = mysqli_connect('127.0.0.1','root','','all_in_one');
+$CONNECT = mysqli_connect($host, $username, $password_for_database, $name_database);
 
 //URL detect
 if ($_SERVER['REQUEST_URI'] == '/') {
@@ -33,50 +33,46 @@ if ($_SERVER['REQUEST_URI'] == '/') {
 
 
 }
-$url = "http://design"; //url сайта
 
-$name = "Forum_name"; // Название для форума
+$name = "Forum_name"; 
 
 // main page
-$index_h1 = "Hello."; //Приветствие 
+$index_h1 = "Hello."; 
 
 $index_text = "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste odit excepturi <br> consectetur libero maiores dicta, perferendis temporibus iusto, <br> facilis rem animi, repellat minus quod magni amet illo? Expedita, debitis velit?</p>"; // Текст приветствия
 
 //login
-$login_h1 = "Welcome."; // Приветствие 
+$login_h1 = "Welcome."; 
 $login_text = "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste odit excepturi <br> consectetur libero maiores dicta, perferendis temporibus iusto, <br> facilis rem animi, repellat minus quod magni amet illo? Expedita, debitis velit?</p>"; // Login text
 $text = "<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, explicabo. A, omnis sequi aliquam iste molestiae! Nam architecto est velit laborum numquam. Dicta minima, aperiam doloremque natus, a totam dolores.</span><br><span>Recusandae culpa, quibusdam obcaecati facere distinctio eum est possimus tenetur excepturi quo reprehenderit fugiat natus iure quis maxime, eaque alias explicabo ea, rem numquam dignissimos illum asperiores nam rerum. Molestiae.</span><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor excepturi soluta eos doloremque, delectus et, laborum quae iusto quisquam architecto explicabo rem vero ab amet tempore nostrum necessitatibus eligendi repellat.</span>
 			<span>Natus, placeat id ipsam est asperiores, consequatur. Ducimus, rerum nam maxime temporibus nobis magnam consequuntur ad sit dolorum deleniti nesciunt voluptates exercitationem praesentium quod harum iure provident veniam esse ut.</span>
 			<span>Sint ipsam error, dolore aperiam porro facilis fugiat corrupti officiis, molestias quo animi pariatur amet quibusdam numquam officia consequatur doloremque impedit, laudantium dignissimos assumenda rem fugit. Impedit, recusandae est id!</span>";
 
 
-//Разрешенные расширения для загрузки файлов на сервер
+
 $types = array('image/gif', 'image/png', 'image/jpeg', '');
-//Максимальный размер файла
+
 $size = 1024000;
 $path = '../img/usr/';
 
-// system functions, изменять только при фатальных ошибках.
-// Необхожимы для работы форума.
 function random_str($value=30){
 	return substr(str_shuffle('0123456789abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, $value);
 }
 
  function can_upload($file){
 	
-	/* если размер файла 0, значит его не пропустили настройки 
-	сервера из-за того, что он слишком большой */
+	
 	if($file['size'] == 0)
 		return 'Файл слишком большой.';
 	
-	// разбиваем имя файла по точке и получаем массив
+	
 	$getMime = explode('.', $file['name']);
-	// нас интересует последний элемент массива - расширение
+	
 	$mime = strtolower(end($getMime));
-	// объявим массив допустимых расширений
+	
 	$types = array('jpg', 'png', 'gif', 'bmp', 'jpeg');
 	
-	// если расширение не входит в список допустимых - return
+	
 	if(!in_array($mime, $types))
 		return 'Недопустимый тип файла.';
 	
@@ -84,7 +80,6 @@ function random_str($value=30){
   }
   
  function make_upload($file){	
-	// формируем уникальное имя картинки: случайное число и name
 	$name = mt_rand(0, 10000) . $file['name'];
 	copy($file['tmp_name'], 'img/' . $name);
   }
