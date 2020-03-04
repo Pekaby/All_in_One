@@ -63,7 +63,7 @@ function random_str($value=30){
 	
 	
 	if($file['size'] == 0)
-		return 'Файл слишком большой.';
+		return 'File is too big.';
 	
 	
 	$getMime = explode('.', $file['name']);
@@ -74,7 +74,7 @@ function random_str($value=30){
 	
 	
 	if(!in_array($mime, $types))
-		return 'Недопустимый тип файла.';
+		return 'Invalid file type.';
 	
 	return true;
   }
@@ -91,7 +91,7 @@ echo		"<div class=\"menu-footer\">";
 echo			"<nav>";
 echo				"<ul>";
 echo					"<a href=\"#\">Donate</a><br>";
-echo					"<a href=\"temp/search.php\">Search</a><br>";
+echo					"<a href=\"temp/search\">Search</a><br>";
 echo				"</ul>";
 echo			"</nav>";
 echo		"</div>";
@@ -359,7 +359,7 @@ footer();
 		$request_for_reset = mysqli_query($CONNECT, "SELECT * FROM `users` WHERE `email` = ('$email')");
 		$count_for_reset = mysqli_num_rows($request_for_reset);
 		if ($count_for_reset <= 0) {
-			$errors[] = 'Данный Email не найден. Возможно, вы ввели его не верно.';
+			$errors[] = 'This Email was not found. Perhaps you entered it incorrectly.';
 		}else {
 			if (empty($errors)) {
 				$email =& $_POST['email'];
@@ -373,7 +373,7 @@ footer();
 			}
 		}
 	}
-	echo "<div style='color:white;'>Проверьте Ваш Email</div>";
+	echo "<div style='color:white;'>Check your Email</div>";
 }
 	if ($_GET['id'] == 2) {
 		header_fuc();
@@ -472,7 +472,7 @@ footer();
 }elseif($page[0]=='/profile'){
 	if (!empty($_GET['id'])) {
 	if ($_GET['id'] == 0) {
-		header("Location: http://newproject.loc");
+		header("Location: /");
 	}
 	$id_user = $_GET['id'];
 	$request = mysqli_query($CONNECT, "SELECT * FROM `users` WHERE `id` = ('$id_user')");
@@ -621,7 +621,7 @@ if (isset($_POST['doedit'])) {
  
 
  	if ($_FILES['picture']['size'] > $size)
- 		die('Слишком большой размер файла.');
+ 		die('File is too big');
  
  // Загрузка файла и вывод сообщения
  	@copy($_FILES['picture']['tmp_name'], $path . $_FILES['picture']['name']);
@@ -708,7 +708,7 @@ if (isset($_POST['docreate'])) {
 		$q = mysqli_query($CONNECT, "SELECT `id` FROM `art` WHERE `id_creater` = ('$id') ORDER BY `pubdate` DESC");
 		$decr = mysqli_fetch_assoc($q);
 		$id_q = $decr['id'];
-		header("Location: http://newproject.loc/theme?id=$id_q");
+		header("Location: /theme?id=$id_q");
 	}
 }
 
